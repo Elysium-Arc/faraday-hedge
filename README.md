@@ -1,8 +1,17 @@
 # Faraday Hedge
 
-Hedged requests for Faraday to reduce tail latency on idempotent methods.
+Hedged requests middleware for Faraday to reduce tail latency on idempotent methods.
 
-## Install
+## About
+Faraday Hedge issues a backup request after a small delay and returns the first response. This reduces tail latency when occasional slow requests occur, while keeping overall load bounded.
+
+The middleware defaults to idempotent methods and can be configured to hedge only specific HTTP verbs.
+
+## Compatibility
+- Ruby 3.0+
+- Faraday 1.0+
+
+## Installation
 ```ruby
 # Gemfile
 
@@ -18,9 +27,14 @@ end
 ```
 
 ## Options
-- `delay`: seconds before firing a backup request
-- `max_hedges`: number of backups (default 1)
-- `methods`: methods eligible for hedging (default GET/HEAD)
+- `delay` (Float) seconds before firing a backup request
+- `max_hedges` (Integer) number of backup requests to allow
+- `methods` (Array) methods eligible for hedging
+- `idempotent_only` (Boolean) restrict hedging to idempotent methods
+
+## Notes
+- Hedging uses background threads.
+- Use conservative delays to avoid excessive duplicate work.
 
 ## Release
 ```bash
