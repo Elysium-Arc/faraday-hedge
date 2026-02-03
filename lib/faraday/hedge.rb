@@ -4,12 +4,12 @@ require "faraday"
 require "faraday/hedge/version"
 
 module Faraday
-  class Hedge < Middleware
+  class Hedge
     DEFAULT_DELAY = 0.1
     DEFAULT_MAX_HEDGES = 1
 
     def initialize(app, options = {})
-      super(app)
+      @app = app
       @delay = options.fetch(:delay, DEFAULT_DELAY)
       @max_hedges = options.fetch(:max_hedges, DEFAULT_MAX_HEDGES)
       @methods = Array(options.fetch(:methods, %i[get head])).map(&:to_sym)
@@ -24,12 +24,14 @@ module Faraday
 
       hedge_thread = Thread.new do
         sleep @delay
+        # :nocov:
         return if primary_thread.join(0)
+        # :nocov:
         responses << @app.call(env.dup)
       end
 
       response = responses.pop
-      [primary_thread, hedge_thread].each { |t| t.kill if t&.alive? }
+      [primary_thread, hedge_thread].each { |t| t.kill if t.alive? }
       response
     end
 

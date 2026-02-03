@@ -7,12 +7,12 @@ RSpec.describe Faraday::Hedge do
   it "returns the fastest response" do
     counter = 0
     mutex = Mutex.new
-
     stubs = Faraday::Adapter::Test::Stubs.new do |stub|
       stub.get("/") do
         call = mutex.synchronize { counter += 1 }
+        result = call == 1 ? "primary" : "hedge"
         sleep 0.2 if call == 1
-        [200, {}, call == 1 ? "primary" : "hedge"]
+        [200, {}, result]
       end
     end
 
@@ -23,6 +23,27 @@ RSpec.describe Faraday::Hedge do
 
     response = conn.get("/")
     expect(response.body).to eq("hedge")
+  end
+
+  it "skips hedging when primary completes before delay" do
+    counter = 0
+    mutex = Mutex.new
+
+    stubs = Faraday::Adapter::Test::Stubs.new do |stub|
+      stub.get("/") do
+        mutex.synchronize { counter += 1 }
+        [200, {}, "primary"]
+      end
+    end
+
+    conn = Faraday.new do |f|
+      f.request :hedge, delay: 0.3
+      f.adapter :test, stubs
+    end
+
+    response = conn.get("/")
+    expect(response.body).to eq("primary")
+    expect(counter).to eq(1)
   end
 
   it "does not hedge non-idempotent methods" do
