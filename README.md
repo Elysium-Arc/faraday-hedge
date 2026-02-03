@@ -2,7 +2,6 @@
 
 [![Gem Version](https://img.shields.io/gem/v/faraday-hedge.svg)](https://rubygems.org/gems/faraday-hedge)
 [![Gem Downloads](https://img.shields.io/gem/dt/faraday-hedge.svg)](https://rubygems.org/gems/faraday-hedge)
-[![Gem Downloads (Monthly)](https://img.shields.io/gem/dm/faraday-hedge.svg)](https://rubygems.org/gems/faraday-hedge)
 [![Ruby](https://img.shields.io/badge/ruby-3.0%2B-cc0000.svg)](https://www.ruby-lang.org)
 [![CI](https://github.com/Elysium-Arc/faraday-hedge/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Elysium-Arc/faraday-hedge/actions/workflows/ci.yml)
 [![GitHub Release](https://img.shields.io/github/v/release/Elysium-Arc/faraday-hedge.svg)](https://github.com/Elysium-Arc/faraday-hedge/releases)
@@ -24,6 +23,13 @@ The middleware defaults to idempotent methods and can be configured to hedge onl
 ## Compatibility
 - Ruby 3.0+
 - Faraday 1.0+
+
+## Elysium Arc Reliability Toolkit
+Also check out these related gems:
+- Cache Coalescer: https://github.com/Elysium-Arc/cache-coalescer
+- Cache SWR: https://github.com/Elysium-Arc/cache-swr
+- Rack Idempotency Kit: https://github.com/Elysium-Arc/rack-idempotency-kit
+- Env Contract: https://github.com/Elysium-Arc/env-contract
 
 ## Installation
 ```ruby
