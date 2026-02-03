@@ -1,7 +1,10 @@
 # Faraday Hedge
 
 [![Gem Version](https://img.shields.io/gem/v/faraday-hedge.svg)](https://rubygems.org/gems/faraday-hedge)
+[![Gem Downloads](https://img.shields.io/gem/dt/faraday-hedge.svg)](https://rubygems.org/gems/faraday-hedge)
+[![CI](https://github.com/Elysium-Arc/faraday-hedge/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Elysium-Arc/faraday-hedge/actions/workflows/ci.yml)
 [![GitHub Release](https://img.shields.io/github/v/release/Elysium-Arc/faraday-hedge.svg)](https://github.com/Elysium-Arc/faraday-hedge/releases)
+[![Rails](https://img.shields.io/badge/rails-6.x%20%7C%207.x%20%7C%208.x-cc0000.svg)](https://rubyonrails.org)
 
 Hedged requests middleware for Faraday to reduce tail latency on idempotent methods.
 
