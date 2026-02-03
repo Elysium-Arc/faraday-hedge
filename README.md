@@ -7,6 +7,11 @@ Faraday Hedge issues a backup request after a small delay and returns the first 
 
 The middleware defaults to idempotent methods and can be configured to hedge only specific HTTP verbs.
 
+## Use Cases
+- Reduce p99 latency for flaky upstream APIs
+- Protect against tail latency spikes on critical read paths
+- Improve UX for latency-sensitive services
+
 ## Compatibility
 - Ruby 3.0+
 - Faraday 1.0+
