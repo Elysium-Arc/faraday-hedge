@@ -46,6 +46,14 @@ conn = Faraday.new do |f|
 end
 ```
 
+Schedule multiple hedges with a delay array:
+```ruby
+conn = Faraday.new do |f|
+  f.request :hedge, delay: [0.05, 0.1], max_hedges: 2
+  f.adapter :net_http
+end
+```
+
 ## Options
 - `delay` (Float) seconds before firing a backup request
 - `max_hedges` (Integer) number of backup requests to allow
